@@ -10,10 +10,11 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface UserApi {
+
     @GET("/user/getAllUsers")
     Call<List<User>> getAllUsers();
 
     @POST("/user/save")
-    Call<User> save(@Body User user);
+    static Call<User> save(@Body User user);
 
 }

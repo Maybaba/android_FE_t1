@@ -3,11 +3,7 @@ package com.example.androidspringclientt;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.androidspringclientt.model.User;
 import com.example.androidspringclientt.retrofit.RetrofitService;
@@ -15,10 +11,12 @@ import com.example.androidspringclientt.retrofit.UserApi;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,16 +47,16 @@ public class MainActivity extends AppCompatActivity {
         user.setBranch(branch);
         user.setLocation(location);
 
-        UserApi.save(User).enqueue(new Callback<User>() {
+        UserApi.save(user).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-
+                Toast.makeText(MainActivity.this, "Save successful!!!! : D ", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(MainActivity.this, "Save failed..! X ( ", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "ERROR !!!! : 0 !!!!");
             }
         });
 

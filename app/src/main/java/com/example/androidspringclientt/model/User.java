@@ -44,4 +44,12 @@ public class User {
         this.userPassword = userPassword;
         this.userName = userName;
     }
+
+    public void setBranch(String branch) {
+        this.setBranch(branch);
+    }
+
+    public void setLocation(String location) {
+        this.setLocation(location);
+    }
 }

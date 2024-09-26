@@ -8,6 +8,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -24,5 +27,16 @@ public class MainActivity extends AppCompatActivity {
         initializeComponents();
     }
 
-    private void initializeComponents
+    private void initializeComponents() {
+        TextInputEditText inputEditName= findViewById(R.id.form_textFieldName);
+        TextInputEditText inputEditBranch= findViewById(R.id.form_textFieldBranch);
+        TextInputEditText inputEditLocation= findViewById(R.id.form_textFieldLocation);
+        MaterialButton buttonSave= findViewById(R.id.form_buttonSave);
+
+        buttonSave.setOnClickListener( view -> {
+            String name = String.valueOf(inputEditName.getText());
+            String branch = String.valueOf(inputEditBranch.getText());
+            String location = String.valueOf(inputEditLocation.getText());
+        });
+    }
 }

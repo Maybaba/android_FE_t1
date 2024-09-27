@@ -1,5 +1,6 @@
 package com.example.androidspringclientt;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.example.androidspringclientt.adapter.UserAdapter;
 import com.example.androidspringclientt.model.User;
 import com.example.androidspringclientt.retrofit.RetrofitService;
 import com.example.androidspringclientt.retrofit.UserApi;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -31,18 +33,19 @@ public class UserListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_list);
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
 
         recyclerView = findViewById(R.id.userList_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        FloatingActionButton floatingActionButton = findViewById(R.id.userList_fab);
+        floatingActionButton.setOnClickListener(view -> {
+            // open other activity
+            Intent intent = new Intent(this, UserForm.class);
+            startActivity(intent);
+        });
         loadUsers();
         }
 //        );
-
     private void loadUsers() {
         RetrofitService retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class); // This line creates an instance of UserApi

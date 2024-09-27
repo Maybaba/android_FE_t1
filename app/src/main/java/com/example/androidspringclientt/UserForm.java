@@ -18,7 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class UserForm extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
             userApi.save(user).enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
-                    Toast.makeText(MainActivity.this, "Save successful!!!! :D", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserForm.this, "Save successful!!!! :D", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    Toast.makeText(MainActivity.this, "Save failed..! X(", Toast.LENGTH_SHORT).show();
-                    Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "ERROR !!!! : 0 !!!!", t);
+                    Toast.makeText(UserForm.this, "Save failed..! X(", Toast.LENGTH_SHORT).show();
+                    Logger.getLogger(UserForm.class.getName()).log(Level.SEVERE, "ERROR !!!! : 0 !!!!", t);
                 }
             });
         });

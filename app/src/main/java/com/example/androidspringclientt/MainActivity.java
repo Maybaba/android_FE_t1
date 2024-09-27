@@ -28,38 +28,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeComponents() {
-        TextInputEditText inputEditName= findViewById(R.id.form_textFieldName);
-        TextInputEditText inputEditBranch= findViewById(R.id.form_textFieldBranch);
-        TextInputEditText inputEditLocation= findViewById(R.id.form_textFieldLocation);
-        MaterialButton buttonSave= findViewById(R.id.form_buttonSave);
+        TextInputEditText inputEditName = findViewById(R.id.form_textFieldName);
+        TextInputEditText inputEditBranch = findViewById(R.id.form_textFieldBranch);
+        TextInputEditText inputEditLocation = findViewById(R.id.form_textFieldLocation);
+        MaterialButton buttonSave = findViewById(R.id.form_buttonSave);
 
+        // Create RetrofitService and get the UserApi instance
         RetrofitService retrofitService = new RetrofitService();
-        retrofitService.getRetrofit().create(UserApi.class);
+        UserApi userApi = retrofitService.getRetrofit().create(UserApi.class); // This line creates an instance of UserApi
 
-        buttonSave.setOnClickListener( view -> {
+        buttonSave.setOnClickListener(view -> {
             String name = String.valueOf(inputEditName.getText());
             String branch = String.valueOf(inputEditBranch.getText());
             String location = String.valueOf(inputEditLocation.getText());
 
+            // Create a new User object and set its fields
+            User user = new User();
+            user.setUserName(name);
+            user.setBranch(branch);
+            user.setLocation(location);
 
-        User user = new User(1, "test@gmail.com", "test1234", "testmmss");
-        user.setUserName(name);
-        user.setBranch(branch);
-        user.setLocation(location);
+            // Call save() on the userApi instance
+            userApi.save(user).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    Toast.makeText(MainActivity.this, "Save successful!!!! :D", Toast.LENGTH_SHORT).show();
+                }
 
-        UserApi.save(user).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(MainActivity.this, "Save successful!!!! : D ", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Save failed..! X ( ", Toast.LENGTH_SHORT).show();
-                Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "ERROR !!!! : 0 !!!!");
-            }
-        });
-
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(MainActivity.this, "Save failed..! X(", Toast.LENGTH_SHORT).show();
+                    Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "ERROR !!!! : 0 !!!!", t);
+                }
+            });
         });
     }
 }

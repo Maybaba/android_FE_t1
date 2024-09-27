@@ -1,33 +1,17 @@
 package com.example.androidspringclientt.model;
 
 public class User {
-    private Integer userIdxId;
-    private String userEmail;
-    private String userPassword;
+    private int userIdxId;
     private String userName;
+    private String location;
+    private String branch;
 
-    public Integer getUserIdxId() {
+    public int getUserIdxId() {
         return userIdxId;
     }
 
-    public void setUserIdxId(Integer userIdxId) {
+    public void setId(int userIdxId) {
         this.userIdxId = userIdxId;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
     }
 
     public String getUserName() {
@@ -38,18 +22,29 @@ public class User {
         this.userName = userName;
     }
 
-    public User(Integer userIdxId, String userEmail, String userPassword, String userName) {
-        this.userIdxId = userIdxId;
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-        this.userName = userName;
-    }
-
-    public void setBranch(String branch) {
-        this.setBranch(branch);
+    public String getLocation() {
+        return location;
     }
 
     public void setLocation(String location) {
-        this.setLocation(location);
+        this.location = location;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    @Override
+    public String toString() {
+        return "User {" +
+                "userIdxId=" + userIdxId +
+                ", userName='" + userName + '\'' +
+                ", location='" + location + '\'' +
+                ", branch='" + branch + '\'' +
+                '}';
     }
 }

@@ -15,6 +15,6 @@ public interface UserApi {
     Call<List<User>> getAllUsers();
 
     @POST("/user/save")
-    static Call<User> save(@Body User user);
+    Call<User> save(@Body User user);
 
 }
